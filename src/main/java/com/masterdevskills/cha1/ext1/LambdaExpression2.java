@@ -22,6 +22,8 @@
 
 package com.masterdevskills.cha1.ext1;
 
+import org.w3c.dom.ls.LSOutput;
+
 /**
  * @author A N M Bazlur Rahman @bazlur_rahman
  * @since 04 August 2020
@@ -37,11 +39,15 @@ public class LambdaExpression2 {
 	 */
 	public void executionTime() {
 		//TODO add your code here;
+		Executable ex = () -> System.out.println(System.currentTimeMillis());
+
+		ex.execute();
+
 	}
 
 	/* TODO: use the above of method here
 	 */
 	public void run() {
-		//executionTime();
+		executionTime();
 	}
 }

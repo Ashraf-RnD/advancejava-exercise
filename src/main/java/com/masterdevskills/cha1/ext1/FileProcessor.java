@@ -22,6 +22,8 @@
 
 package com.masterdevskills.cha1.ext1;
 
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -45,6 +47,23 @@ public class FileProcessor {
      * @see List#removeIf(Predicate)
      */
     public List<String> readFileFrom(String fileName) {
+        var file = new File(fileName);
+        List<String> stringList = new ArrayList<>();
+
+        try {
+            var reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                if (!stringList.contains(line) && !line.isEmpty())
+                    stringList.add(line);
+            }
+
+            reader.close();
+
+            return stringList;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         throw new RuntimeException("Not Yet Implemented");
     }
@@ -60,6 +79,19 @@ public class FileProcessor {
      */
     public void writeToFile(List<String> lines, String fileName) {
 
+        try {
+            var file = new File(fileName);
+
+            var writer = new OutputStreamWriter(new FileOutputStream(file));
+
+            var s= String.join("\\n\n",lines);
+            writer.write(s.trim());
+
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         throw new RuntimeException("Not Yet Implemented");
     }
 }
