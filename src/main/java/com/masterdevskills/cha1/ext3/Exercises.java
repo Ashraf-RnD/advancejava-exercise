@@ -23,8 +23,12 @@
 package com.masterdevskills.cha1.ext3;
 
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 /**
  * @author A N M Bazlur Rahman @bazlur_rahman
@@ -41,7 +45,9 @@ public class Exercises {
 	 * @see List#replaceAll(UnaryOperator)
 	 */
 	public static List<Integer> doubling(List<Integer> ints) {
-		throw new RuntimeException("NotYetImplemented");
+		UnaryOperator<Integer> func = i -> i * 2;
+		ints.replaceAll(func);
+		return ints;
 	}
 
 	/**
@@ -52,7 +58,9 @@ public class Exercises {
 	 * @see List#replaceAll(UnaryOperator)
 	 */
 	public static List<String> addSuffix(List<String> items, String suffix) {
-		throw new RuntimeException("NotYetImplemented");
+		UnaryOperator<String> func =  s -> s.concat(suffix);
+		items.replaceAll(func);
+		return items;
 	}
 
 	/***
@@ -61,7 +69,10 @@ public class Exercises {
 	 * @param people list of person
 	 * */
 	public static List<Person> sortItemByFirstNameOrderAscending(List<Person> people) {
-		throw new RuntimeException("NotYetImplemented");
+
+		return people.stream()
+				.sorted(Comparator.comparing(Person::getFirstName))
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -70,7 +81,8 @@ public class Exercises {
 	 * @param people list of person
 	 */
 	public static List<Person> sortByLastNameOrderDescending(List<Person> people) {
-		throw new RuntimeException("NotYetImplemented");
+		people.sort(Collections.reverseOrder(Comparator.comparing(Person::getLastName)));
+		return people;
 	}
 
 	/**
@@ -81,6 +93,9 @@ public class Exercises {
 	 * @param people list of person
 	 */
 	public static List<Person> sortByFirstNameAndThenLastNameAndThenAge(List<Person> people) {
-		throw new RuntimeException("NotYetImplemented");
+		people.sort(Comparator.comparing(Person::getFirstName)
+				.thenComparing(Person::getLastName)
+				.thenComparing(Person::getAge));
+		return people;
 	}
 }
